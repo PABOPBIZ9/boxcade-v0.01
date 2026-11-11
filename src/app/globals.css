@@ -1,1 +1,40 @@
-@import "tailwindcss";
+:root{--bg:#fff7e8;--card:#fff;--ink:#1b1030;--mut:#6b5f86;--line:#1b1030;--red:#ff3d5a;--teal:#14c8b8;--yel:#ffc93c;--vio:#6c4bff;--pink:#ff7ab6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2468;--card:#3a3290;--ink:#fff7e8;--mut:#c9c0f0;--line:#0f0a2e}}
+:root[data-theme="dark"]{--bg:#2a2468;--card:#3a3290;--ink:#fff7e8;--mut:#c9c0f0;--line:#0f0a2e}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 15px/1.4 var(--font-nunito),Nunito,system-ui,sans-serif;padding-bottom:90px;background-image:radial-gradient(var(--line) 1px,transparent 1.5px);background-size:26px 26px;background-attachment:fixed}
+h1,h2,h3,.d{font-family:var(--font-bagel),"Bagel Fat One",Impact,sans-serif;font-weight:400;margin:0;letter-spacing:.5px}
+button{font:inherit;font-weight:800;color:var(--ink);cursor:pointer}a{color:inherit}
+.btn{background:var(--yel);border:3px solid var(--line);border-radius:999px;padding:9px 18px;box-shadow:0 4px 0 var(--line);transition:transform .08s,box-shadow .08s;color:#1b1030}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}.btn.w{background:var(--card);color:var(--ink)}.btn.r{background:var(--red);color:#fff}.btn.t{background:var(--teal);color:#1b1030}
+:focus-visible{outline:3px solid var(--vio);outline-offset:2px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px;padding:8px 12px;background:var(--card);border:3px solid var(--line);border-radius:22px;box-shadow:0 5px 0 var(--line)}
+.logo{display:flex;align-items:center;gap:8px;font:400 26px var(--font-bagel),"Bagel Fat One";text-decoration:none;color:var(--red);-webkit-text-stroke:1.5px var(--line);paint-order:stroke fill}
+nav a.tab{padding:6px 12px;border-radius:99px;text-decoration:none;font-weight:800}nav a.tab.on{background:var(--yel);border:2px solid var(--line);color:#1b1030}
+.sp{flex:1}main{max-width:1150px;margin:0 auto;padding:6px 14px}
+.hero{position:relative;overflow:hidden;border:3px solid var(--line);border-radius:28px;box-shadow:0 7px 0 var(--line);background:repeating-linear-gradient(90deg,var(--red) 0 44px,#fff 44px 88px);color:#1b1030;margin-top:8px}
+.hero .in{background:linear-gradient(transparent,rgba(255,247,232,.96) 55%);padding:90px 22px 22px;display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.hero h1{font-size:clamp(34px,7vw,68px);line-height:.95;color:#1b1030}.hero h1 span{color:var(--red)}
+.bulbs{position:absolute;top:8px;left:0;right:0;display:flex;justify-content:space-around}.bulbs i{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);animation:bl 1.4s infinite}
+.bulbs i:nth-child(3n){background:var(--yel)}.bulbs i:nth-child(3n+1){background:var(--teal);animation-delay:.4s}.bulbs i:nth-child(3n+2){background:var(--pink);animation-delay:.8s}
+@keyframes bl{50%{opacity:.35}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.stat{flex:1;min-width:120px;background:var(--card);border:3px solid var(--line);border-radius:16px;padding:8px 12px;box-shadow:0 4px 0 var(--line)}.stat b{display:block;font:400 22px var(--font-bagel),"Bagel Fat One"}.stat small{color:var(--mut)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 5px 0 var(--line);position:relative;cursor:pointer;transition:transform .12s}.card:hover{transform:translateY(-3px) rotate(-.6deg)}
+.card.sel{outline:4px solid var(--yel)}.card .img{background:linear-gradient(#8fe3ff,#fff7e8);padding:6px}.card .img svg{width:100%;display:block}
+.card .meta{padding:8px 11px}.tag{position:absolute;top:8px;left:8px;background:var(--card);border:2px solid var(--line);border-radius:99px;padding:1px 8px;font-size:12px;font-weight:800;color:var(--ink)}
+.pm{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;border:3px solid var(--line);background:var(--card);padding:0;line-height:1;font-size:18px}.sel .pm{background:var(--yel);color:#1b1030}
+.mut{color:var(--mut);font-size:13px}.price{font:400 20px var(--font-bagel),"Bagel Fat One"}
+.sweep{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:30;max-width:1130px;margin:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--card);border:3px solid var(--line);border-radius:22px;padding:8px 12px;box-shadow:0 5px 0 var(--line)}
+.q{display:flex;align-items:center;gap:6px}.q button{width:32px;height:32px;border-radius:50%;border:3px solid var(--line);background:var(--card);padding:0}
+input,select{font:inherit;font-weight:700;border:3px solid var(--line);border-radius:14px;padding:7px 10px;background:var(--card);color:var(--ink);min-width:0}input[type=range]{padding:0;accent-color:var(--red)}
+.panel{background:var(--card);border:3px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 5px 0 var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:760px){.two{grid-template-columns:1fr}}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:9px 8px;border-bottom:2px dashed var(--mut)}
+.modal{position:fixed;inset:0;background:rgba(27,16,48,.65);z-index:50;display:none;align-items:center;justify-content:center;padding:14px}.modal.on{display:flex}.modal .panel{max-width:440px;width:100%;max-height:90vh;overflow:auto}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.chip{border:2px solid var(--line);border-radius:99px;padding:4px 11px;background:var(--card);font-size:13px}.chip.on{background:var(--teal);color:#1b1030}
+#toast{position:fixed;top:calc(80px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;z-index:60;display:none;max-width:90vw}
+.wheel{width:230px;height:230px;border-radius:50%;border:5px solid var(--line);margin:auto;transition:transform 3.4s cubic-bezier(.12,.7,.1,1);background:conic-gradient(var(--red) 0 60deg,var(--yel) 0 120deg,var(--teal) 0 180deg,var(--vio) 0 240deg,var(--pink) 0 300deg,#fff 0 360deg)}
+.ptr{width:0;height:0;border:14px solid transparent;border-top:26px solid var(--line);margin:0 auto -8px;position:relative;z-index:2}
+.wallet-chip{display:inline-flex;align-items:center;gap:6px}.wallet-chip img{width:16px;height:16px;border-radius:4px}

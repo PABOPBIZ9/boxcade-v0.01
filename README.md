@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Boxcade v0.01
 
-## Getting Started
+A mystery-box midway: browse the market, sweep the floor, spin a practice wheel, and check out with crypto or a card stub.
 
-First, run the development server:
+v0.01 is the prototype look and copy, now running as a Next.js app with Dynamic for login and wallet payments.
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
+npm install
+npm run dev      # http://localhost:3000
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+None of these are required for the site to build or render. If the Dynamic environment ID is missing, Sign in falls back to the original demo flow with a short note.
 
-## Learn More
+| Variable | What it is |
+| --- | --- |
+| `NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID` | Dynamic environment ID (Sandbox ID can ship now; swap for Live later). |
+| `NEXT_PUBLIC_TREASURY_SOL` | Solana address that receives SOL, USDC, and USDT payments. Unset = labeled demo toast. |
+| `NEXT_PUBLIC_TREASURY_EVM` | Ethereum address that receives ETH, USDC, and USDT payments. Unset = labeled demo toast. |
+| `NEXT_PUBLIC_ETH_USD` | Optional USD price of 1 ETH, used only when the buyer pays with ETH. |
+| `NEXT_PUBLIC_SOLANA_RPC_URL` | Optional Solana RPC. Defaults to public mainnet. |
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local` for local development. On Vercel, set the same keys on the project, then redeploy (`NEXT_PUBLIC_*` values are baked in at build time).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## What is wired
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Sign in** opens a Boxcade-styled Dynamic flow: email OTP plus detected external wallets (Solana first, then EVM, Bitcoin, and TON). After sign-in, the header shows the user and Log out is available.
+- **Embedded wallets** are created after auth via WaaS (`userChanged` → `getChainsMissingWaasWalletAccounts` → `createWaasWalletAccounts`).
+- **Crypto Pay** asks the connected wallet to send to the treasury when an address is set: native SOL, Solana USDC/USDT, Ethereum USDC/USDT, and ETH if `NEXT_PUBLIC_ETH_USD` is set. Bitcoin, Zcash, and Robinhood Chain without a matching treasury stay a labeled demo toast.
+- **Card Pay** remains a Whop checkout stub.
 
-## Deploy on Vercel
+## Confirm these Dynamic Console settings
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In [https://console.dynamic.xyz](https://console.dynamic.xyz), on the environment that matches the ID in `NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Chains & Networks** — EVM, Solana, Bitcoin, and TON are on.
+2. **Sign-in methods** — Email OTP is on (and any social providers you want).
+3. **Wallets** — Embedded wallets (WaaS) are on.
+4. **Security → Allowed Origins** — add the exact production origin and `http://localhost:3000`.
+
+If you accept API version `2026_04_01`, step-up authentication and device registration may be required for some wallet actions. The app surfaces those errors in a toast; you may still need to complete verification or device registration in Dynamic.
+
+## Stack
+
+- Next.js App Router + TypeScript
+- Dynamic JavaScript SDK (`@dynamic-labs-sdk/client`, `@dynamic-labs-sdk/react-hooks`) with EVM, Solana, Bitcoin, and TON extensions
